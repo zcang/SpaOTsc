@@ -45,6 +45,8 @@ intercellular_grn=spsc.spatial_grn_range(['Wnt5','fz','CycD','dpp'], effect_rang
 
 For more details, please see the jupyter notebooks in ``tutorial_short`` and api document in ``doc/API_reference.pdf``.
 
+A **full tutorial** reproducing results in the publication can be obtained through this [Google Drive link](https://drive.google.com/file/d/1IqKp-KkVOvSUDhiyDMRgkueiLdkeApgd/view?usp=sharing)
+
 ## Ackonwledgement
 SpaOTsc relies on optimal transport theory (especially structured ot [1] and unbalanced ot [2]), partial information decomposition [3], and random forest model [4].
 
