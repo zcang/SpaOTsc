@@ -170,8 +170,10 @@ class spatial_sc(object):
         # w_b = np.ones(cost_matrix.shape[1])
         w_a = w_a/np.sum(w_a); w_b = w_b/np.sum(w_b)
         if alpha > 0.0:
-            G_sc = self.sc_dmat/np.max(self.sc_dmat)
-            G_is = self.is_dmat/np.max(self.is_dmat)
+            if G_sc is None:
+                G_sc = self.sc_dmat/np.max(self.sc_dmat)
+            if G_is is None:
+                G_is = self.is_dmat/np.max(self.is_dmat)
         if scaling:
             cost_matrix = cost_matrix/np.max(cost_matrix)
         if alpha == 0.0 and np.isinf(rho):
