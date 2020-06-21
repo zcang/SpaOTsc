@@ -56,4 +56,4 @@ SpaOTsc relies on optimal transport theory (especially structured ot [1] and unb
 [3] Williams, Paul L., and Randall D. Beer. "Nonnegative decomposition of multivariate information." arXiv preprint arXiv:1004.2515 (2010).  
 [4] Liaw, Andy, and Matthew Wiener. "Classification and regression by randomForest." R news 2.3 (2002): 18-22.
 
-If you find this work useful, please cite: **Cang, Z. and Nie, Q. "SpaOTsc: spatial optimal transport for single-cell transcriptomics data." (2019).**
+If you find this work useful, please cite: **Cang, Zixuan, and Qing Nie. "Inferring spatial and signaling relationships between cells from single cell transcriptomic data." Nature communications 11.1 (2020): 1-13.**
