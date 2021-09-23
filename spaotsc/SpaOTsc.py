@@ -345,7 +345,7 @@ class spatial_sc(object):
                             weights=None)
         return partition
 
-    def clustering(self, genes=None, pca_n_components=None, res_sc=0.5, res_is=0.3, min_n = 3):
+    def clustering(self, genes=None, pca_n_components=None, res_sc=0.5, res_is=0.3, min_n = 3, randomseed_numpy=92614, randomseed_louvain=48823):
         """Clustering and spatial subclustering.
         
         Generates:
@@ -373,8 +373,9 @@ class spatial_sc(object):
         """
 
         # need to set random seed for both numpy and louvain to be consistent
-        np.random.seed(92614)
-        louvain.set_rng_seed(48823)
+        np.random.seed(randomseed_numpy)
+        if not louvain.__version__ in ['0.7.0']:
+            louvain.set_rng_seed(randomseed_louvain)
         if genes is None:
             genes = self.sc_genes
         X = np.array( self.sc_data[genes], float )
@@ -386,10 +387,16 @@ class spatial_sc(object):
         G_sc = knn_graph(dmat_sc, 10) # 50 for drosophila and 10 for zebrafish?
         G_is = knn_graph(dmat_is, 50)
         weights = np.array(G_sc.es["weight"]).astype(np.float64)
-        partition_sc = louvain.find_partition(G_sc, \
-                       louvain.RBConfigurationVertexPartition, \
-                       resolution_parameter=res_sc, \
-                       weights=None)
+        if not louvain.__version__ in ['0.7.0']:
+            partition_sc = louvain.find_partition(G_sc, \
+                           louvain.RBConfigurationVertexPartition, \
+                           resolution_parameter=res_sc, \
+                           weights=None)
+        else:
+            partition_sc = louvain.find_partition(G_sc, \
+                           louvain.RBConfigurationVertexPartition, \
+                           resolution_parameter=res_sc, \
+                           weights=None, seed=randomseed_louvain)
         ncluster_sc = len(partition_sc)
         sub_partitions = []
         partition_inds = {}
