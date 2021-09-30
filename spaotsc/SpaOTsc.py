@@ -322,7 +322,7 @@ class spatial_sc(object):
         bar.finish()
         return D
 
-    def gene_clustering(self, gene_dmat, res=3, k=5, rng_seed=48823):
+    def gene_clustering(self, gene_dmat, res=3, k=5, randomseed_louvain=48823):
         """
         Cluster the genes based on their spatial pattern difference.
 
@@ -338,11 +338,18 @@ class spatial_sc(object):
         :rtype: list of list of int
         """
         G = knn_graph(gene_dmat, k)
-        louvain.set_rng_seed(rng_seed)
-        partition = louvain.find_partition(G, \
-                            louvain.RBConfigurationVertexPartition, \
-                            resolution_parameter=res, \
-                            weights=None)
+        if not louvain.__version__ in ['0.7.0']:
+            louvain.set_rng_seed(randomseed_louvain)
+        if not louvain.__version__ in ['0.7.0']:
+            partition = louvain.find_partition(G, \
+                                louvain.RBConfigurationVertexPartition, \
+                                resolution_parameter=res, \
+                                weights=None)
+        else:
+            partition = louvain.find_partition(G, \
+                                louvain.RBConfigurationVertexPartition, \
+                                resolution_parameter=res, \
+                                weights=None, seed=randomseed_louvain)
         return partition
 
     def clustering(self, genes=None, pca_n_components=None, res_sc=0.5, res_is=0.3, min_n = 3, randomseed_numpy=92614, randomseed_louvain=48823):
