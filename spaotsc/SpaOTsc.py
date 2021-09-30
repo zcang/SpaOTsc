@@ -416,10 +416,16 @@ class spatial_sc(object):
             G_is_sub_vs = G_is.vs.select(cid)
             G_is_sub = G_is.subgraph(G_is_sub_vs)
             weights = np.array(G_is_sub.es["weight"]).astype(np.float64)
-            tmp_partition = louvain.find_partition(G_is_sub, \
-                            louvain.RBConfigurationVertexPartition, \
-                            resolution_parameter=res_is, \
-                            weights=None)
+            if not louvain.__version__ in ['0.7.0']:
+                tmp_partition = louvain.find_partition(G_is_sub, \
+                                louvain.RBConfigurationVertexPartition, \
+                                resolution_parameter=res_is, \
+                                weights=None)
+            else:
+                tmp_partition = louvain.find_partition(G_is_sub, \
+                                louvain.RBConfigurationVertexPartition, \
+                                resolution_parameter=res_is, \
+                                weights=None, seed=randomseed_louvain)
             sub_partitions.append(tmp_partition)
             print(i, len(tmp_partition), [len(tmp_partition[j]) for j in range(len(tmp_partition))] )
             cnt = 0
