@@ -338,9 +338,9 @@ class spatial_sc(object):
         :rtype: list of list of int
         """
         G = knn_graph(gene_dmat, k)
-        if not louvain.__version__ in ['0.7.0']:
+        if not louvain.__version__ in ['0.7.0','0.7.1']:
             louvain.set_rng_seed(randomseed_louvain)
-        if not louvain.__version__ in ['0.7.0']:
+        if not louvain.__version__ in ['0.7.0','0.7.1']:
             partition = louvain.find_partition(G, \
                                 louvain.RBConfigurationVertexPartition, \
                                 resolution_parameter=res, \
@@ -381,7 +381,7 @@ class spatial_sc(object):
 
         # need to set random seed for both numpy and louvain to be consistent
         np.random.seed(randomseed_numpy)
-        if not louvain.__version__ in ['0.7.0']:
+        if not louvain.__version__ in ['0.7.0','0.7.1']:
             louvain.set_rng_seed(randomseed_louvain)
         if genes is None:
             genes = self.sc_genes
@@ -394,7 +394,7 @@ class spatial_sc(object):
         G_sc = knn_graph(dmat_sc, 10) # 50 for drosophila and 10 for zebrafish?
         G_is = knn_graph(dmat_is, 50)
         weights = np.array(G_sc.es["weight"]).astype(np.float64)
-        if not louvain.__version__ in ['0.7.0']:
+        if not louvain.__version__ in ['0.7.0','0.7.1']:
             partition_sc = louvain.find_partition(G_sc, \
                            louvain.RBConfigurationVertexPartition, \
                            resolution_parameter=res_sc, \
@@ -416,7 +416,7 @@ class spatial_sc(object):
             G_is_sub_vs = G_is.vs.select(cid)
             G_is_sub = G_is.subgraph(G_is_sub_vs)
             weights = np.array(G_is_sub.es["weight"]).astype(np.float64)
-            if not louvain.__version__ in ['0.7.0']:
+            if not louvain.__version__ in ['0.7.0','0.7.1']:
                 tmp_partition = louvain.find_partition(G_is_sub, \
                                 louvain.RBConfigurationVertexPartition, \
                                 resolution_parameter=res_is, \
