@@ -17,7 +17,7 @@ matplotlib==3.1.0
 more-itertools==7.0.0
 networkx==2.3
 numba==0.44.0
-numpy==1.16.4
+numpy==1.22.0
 packaging==19.0
 pandas==0.24.2
 pbr==5.2.1
