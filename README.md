@@ -48,7 +48,7 @@ For more details, please see the jupyter notebooks in ``tutorial_short`` and api
 A **full tutorial** reproducing results in the publication can be obtained through this [Google Drive link](https://drive.google.com/file/d/1IqKp-KkVOvSUDhiyDMRgkueiLdkeApgd/view?usp=sharing) or [Dropbox link](https://www.dropbox.com/s/w4ow94s7ek8zemr/SpaOTsc_tutorial_full.zip?dl=0).
 (The Google drive link sometimes doesn't work in Chrome. Please try other browsers if it fails to download.)
 
-## Ackonwledgement
+## Acknowledgement
 SpaOTsc relies on optimal transport theory (especially structured ot [1] and unbalanced ot [2]), partial information decomposition [3], and random forest model [4].
 
 [1] Titouan, Vayer, et al. "Optimal Transport for structured data with application on graphs." International Conference on Machine Learning. 2019.  
